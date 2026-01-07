@@ -16,8 +16,8 @@ uses
 
 begin
   Application.Initialize;
-  Application.Title := 'Librarika';
   Application.CreateForm(TDM_perpus127, DM_perpus127);
+  Application.Title := 'Librarika';
   Application.CreateForm(TFormLogin, FormLogin);
   Application.CreateForm(TFormDashboard, FormDashboard);
   Application.CreateForm(TFormAnggota, FormAnggota);
