@@ -4,10 +4,44 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs;
+  Dialogs, Mask, DBCtrls, ExtCtrls, SMDBCtrl, Grids, DBGrids, SMDBGrid,
+  jpeg, StdCtrls;
 
 type
   TFormPeminjaman = class(TForm)
+    GroupBox4: TGroupBox;
+    Label3: TLabel;
+    Label2: TLabel;
+    Button2: TButton;
+    btnTambah: TButton;
+    GroupBox3: TGroupBox;
+    Button6: TButton;
+    GroupBox2: TGroupBox;
+    Image1: TImage;
+    GroupBox1: TGroupBox;
+    dbgrid_anggota: TSMDBGrid;
+    Button1: TButton;
+    SMDBNavigator1: TSMDBNavigator;
+    btnBuku: TButton;
+    btnPinjam: TButton;
+    Button3: TButton;
+    GroupBox5: TGroupBox;
+    Label4: TLabel;
+    Label5: TLabel;
+    Button4: TButton;
+    btnEdit: TButton;
+    dblAnggota: TDBLookupComboBox;
+    dblBuku: TDBLookupComboBox;
+    dblAnggota2: TDBLookupComboBox;
+    dblBuku2: TDBLookupComboBox;
+    procedure Button1Click(Sender: TObject);
+    procedure btnAnggotaClick(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
+    procedure btnTambahClick(Sender: TObject);
+    procedure btnEditClick(Sender: TObject);
+    procedure btnBukuClick(Sender: TObject);
+    procedure btnUserClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -19,6 +53,150 @@ var
 
 implementation
 
+uses Unit6, Unit1, UASpas, Unit2, Unit7;
+
 {$R *.dfm}
+
+procedure TFormPeminjaman.Button1Click(Sender: TObject);
+var
+  selectedID: Integer;
+begin
+  selectedID :=
+    DM_perpus127.zq_anggota127.FieldByName('id_peminjaman').AsInteger;
+
+  try
+    with DM_perpus127.zq_del_anggota do   // ?? PAKAI QUERY EKSEKUSI
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add(
+        'DELETE FROM anggota WHERE id_anggota = :id'
+      );
+      ParamByName('id').AsInteger := selectedID;
+      ExecSQL;
+    end;
+  except
+    on E: Exception do
+    begin
+      // ?? CEK ERROR FOREIGN KEY
+      if Pos('foreign key', LowerCase(E.Message)) > 0 then
+        ShowMessage(
+          'Data anggota tidak bisa dihapus!' + #13 +
+          'Masih digunakan pada tabel lain.'
+        )
+      else
+        ShowMessage('Gagal menghapus data: ' + E.Message);
+    end;
+  end;
+
+  // refresh data
+  DM_perpus127.zq_anggota127.SQL.Clear;
+  DM_perpus127.zq_anggota127.SQL.Add('SELECT * FROM anggota');
+  DM_perpus127.zq_anggota127.Open;
+end;
+
+procedure TFormPeminjaman.btnAnggotaClick(Sender: TObject);
+begin
+Self.Hide;
+FormAnggota.Show;
+end;
+
+procedure TFormPeminjaman.Button6Click(Sender: TObject);
+begin
+  DM_Perpus127.ZConnection1.Disconnect;
+  FormLogin.Show;
+  Self.Hide;
+end;
+
+procedure TFormPeminjaman.btnTambahClick(Sender: TObject);
+begin
+ if (dblAnggota.KeyValue = Null) or (dblBuku.KeyValue = Null) then
+  begin
+    ShowMessage('Anggota dan Buku wajib dipilih!');
+    Exit;
+  end;
+
+  with DM_perpus127.zq_peminjaman127 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add(
+      'INSERT INTO peminjaman ' +
+      '(id_anggota, id_buku, tanggal_pinjam, tanggal_kembali, status) ' +
+      'VALUES (:id_anggota, :id_buku, :tgl_pinjam, :tgl_kembali, :status)'
+    );
+
+    ParamByName('id_anggota').AsInteger := dblAnggota.KeyValue;
+    ParamByName('id_buku').AsInteger := dblBuku.KeyValue;
+    ParamByName('tgl_pinjam').AsDate := Date; // TANGGAL SEKARANG
+//    ParamByName('tgl_kembali').AsDate := dtpKembali.Date;
+//    ParamByName('status').AsString := ComboBoxStatus.Text;
+
+    ExecSQL;
+
+    SQL.Clear;
+    SQL.Add('SELECT * FROM peminjaman');
+    Open;
+  end;
+
+  ShowMessage('Data peminjaman berhasil ditambahkan!');
+end;
+
+procedure TFormPeminjaman.btnEditClick(Sender: TObject);
+begin
+ if DM_perpus127.zq_peminjaman127.IsEmpty then Exit;
+
+  if (dblAnggota2.KeyValue = Null) or (dblBuku2.KeyValue = Null) then
+  begin
+    ShowMessage('Anggota dan Buku wajib dipilih!');
+    Exit;
+  end;
+
+  with DM_perpus127.zq_peminjaman127 do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add(
+      'UPDATE peminjaman SET ' +
+      'id_anggota = :id_anggota, ' +
+      'id_buku = :id_buku, ' +
+      'tanggal_kembali = :tgl_kembali, ' +
+      'status = :status ' +
+      'WHERE id_peminjaman = :id_peminjaman'
+    );
+
+    ParamByName('id_anggota').AsInteger := dblAnggota2.KeyValue;
+    ParamByName('id_buku').AsInteger := dblBuku2.KeyValue;
+//    ParamByName('tgl_kembali').AsDate := dtpKembali.Date;
+//    ParamByName('status').AsString := ComboBoxStatus.Text;
+    ParamByName('id_peminjaman').AsInteger :=
+    FieldByName('id_peminjaman').AsInteger;
+
+    ExecSQL;
+
+    SQL.Clear;
+    SQL.Add('SELECT * FROM peminjaman');
+    Open;
+  end;
+
+  ShowMessage('Data peminjaman berhasil diperbarui!');
+end;
+
+procedure TFormPeminjaman.btnBukuClick(Sender: TObject);
+begin
+  Self.Hide;
+  FormBuku.Show;
+end;
+
+procedure TFormPeminjaman.btnUserClick(Sender: TObject);
+begin
+  Self.Hide;
+  FormUser.Show;
+end;
+
+procedure TFormPeminjaman.FormCreate(Sender: TObject);
+begin
+  DM_perpus127.zq_peminjaman127.Active := True;
+end;
 
 end.

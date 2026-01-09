@@ -1,9 +1,9 @@
-object FormBuku: TFormBuku
-  Left = 261
-  Top = 177
-  Width = 800
+object FormUser: TFormUser
+  Left = 335
+  Top = 185
+  Width = 801
   Height = 440
-  Caption = 'Form Buku'
+  Caption = 'Form User'
   Color = clHighlightText
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,117 +15,6 @@ object FormBuku: TFormBuku
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object GroupBox5: TGroupBox
-    Left = 478
-    Top = 54
-    Width = 298
-    Height = 153
-    TabOrder = 8
-    object Label2: TLabel
-      Left = 12
-      Top = 25
-      Width = 25
-      Height = 13
-      Caption = 'Judul'
-    end
-    object Label4: TLabel
-      Left = 12
-      Top = 51
-      Width = 34
-      Height = 13
-      Caption = 'Penulis'
-    end
-    object Label5: TLabel
-      Left = 12
-      Top = 77
-      Width = 24
-      Height = 13
-      Caption = 'Jenis'
-    end
-    object Label9: TLabel
-      Left = 12
-      Top = 103
-      Width = 22
-      Height = 13
-      Caption = 'Stok'
-    end
-    object Label10: TLabel
-      Left = 12
-      Top = 129
-      Width = 39
-      Height = 13
-      Caption = 'Penerbit'
-    end
-    object Button4: TButton
-      Left = 210
-      Top = 50
-      Width = 75
-      Height = 25
-      Caption = 'Batal'
-      TabOrder = 0
-    end
-    object btnEdit: TButton
-      Left = 210
-      Top = 18
-      Width = 75
-      Height = 25
-      Caption = 'Edit Data'
-      TabOrder = 1
-      OnClick = btnEditClick
-    end
-    object dblPenerbit2: TDBLookupComboBox
-      Left = 77
-      Top = 124
-      Width = 118
-      Height = 21
-      DataField = 'id_penerbit'
-      DataSource = DM_perpus127.ds_buku127
-      KeyField = 'id_penerbit'
-      ListField = 'nama_penerbit'
-      ListSource = DM_perpus127.ds_penerbit127
-      TabOrder = 2
-    end
-    object DBJudul: TDBEdit
-      Left = 74
-      Top = 21
-      Width = 121
-      Height = 21
-      DataField = 'judul'
-      DataSource = DM_perpus127.ds_buku127
-      TabOrder = 3
-    end
-    object DBPenulis: TDBEdit
-      Left = 74
-      Top = 47
-      Width = 121
-      Height = 21
-      DataField = 'penulis'
-      DataSource = DM_perpus127.ds_buku127
-      TabOrder = 4
-    end
-    object edtStok2: TDBEdit
-      Left = 74
-      Top = 98
-      Width = 121
-      Height = 21
-      DataField = 'stok'
-      DataSource = DM_perpus127.ds_buku127
-      TabOrder = 5
-    end
-    object dbcbJenis: TDBComboBox
-      Left = 75
-      Top = 72
-      Width = 120
-      Height = 21
-      DataField = 'jenis'
-      DataSource = DM_perpus127.ds_buku127
-      ItemHeight = 13
-      Items.Strings = (
-        'Buku'
-        'Majalah')
-      TabOrder = 6
-    end
-  end
   object GroupBox4: TGroupBox
     Left = 170
     Top = 50
@@ -133,43 +22,29 @@ object FormBuku: TFormBuku
     Height = 159
     TabOrder = 0
     object Label3: TLabel
-      Left = 12
-      Top = 31
-      Width = 25
-      Height = 13
-      Caption = 'Judul'
-    end
-    object Label1: TLabel
-      Left = 12
-      Top = 57
-      Width = 34
-      Height = 13
-      Caption = 'Penulis'
-    end
-    object Label6: TLabel
-      Left = 12
-      Top = 83
-      Width = 24
-      Height = 13
-      Caption = 'Jenis'
-    end
-    object Label7: TLabel
-      Left = 12
-      Top = 109
+      Left = 6
+      Top = 86
       Width = 22
       Height = 13
-      Caption = 'Stok'
+      Caption = 'Role'
     end
-    object Label8: TLabel
-      Left = 12
-      Top = 135
-      Width = 39
+    object Label2: TLabel
+      Left = 7
+      Top = 52
+      Width = 46
       Height = 13
-      Caption = 'Penerbit'
+      Caption = 'Password'
+    end
+    object lblUsername: TLabel
+      Left = 6
+      Top = 22
+      Width = 48
+      Height = 13
+      Caption = 'Username'
     end
     object Button2: TButton
-      Left = 204
-      Top = 56
+      Left = 205
+      Top = 51
       Width = 75
       Height = 25
       Caption = 'Batal'
@@ -177,55 +52,115 @@ object FormBuku: TFormBuku
     end
     object btnTambah: TButton
       Left = 206
-      Top = 22
+      Top = 17
       Width = 75
       Height = 25
       Caption = 'Tambah Data'
       TabOrder = 1
       OnClick = btnTambahClick
     end
-    object dblPenerbit: TDBLookupComboBox
-      Left = 72
-      Top = 129
-      Width = 118
+    object edtUsername: TEdit
+      Left = 64
+      Top = 18
+      Width = 121
       Height = 21
-      KeyField = 'id_penerbit'
-      ListField = 'nama_penerbit'
-      ListSource = DM_perpus127.ds_penerbit127
       TabOrder = 2
     end
-    object edtJudul: TEdit
-      Left = 70
-      Top = 22
+    object edtPass: TEdit
+      Left = 64
+      Top = 49
       Width = 121
       Height = 21
       TabOrder = 3
     end
-    object edtPenulis: TEdit
-      Left = 70
-      Top = 49
+    object cbRole: TComboBox
+      Left = 64
+      Top = 80
       Width = 121
-      Height = 21
-      TabOrder = 4
-    end
-    object edtStok: TEdit
-      Left = 70
-      Top = 103
-      Width = 121
-      Height = 21
-      TabOrder = 5
-    end
-    object cbJenis: TComboBox
-      Left = 72
-      Top = 78
-      Width = 119
       Height = 21
       ItemHeight = 13
-      TabOrder = 6
-      Text = 'cbJenis'
+      TabOrder = 4
+      Text = 'cbRole'
       Items.Strings = (
-        'Buku'
-        'Majalah')
+        'admin'
+        'petugas')
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 478
+    Top = 54
+    Width = 298
+    Height = 156
+    TabOrder = 1
+    object Label4: TLabel
+      Left = 9
+      Top = 80
+      Width = 22
+      Height = 13
+      Caption = 'Role'
+    end
+    object Label5: TLabel
+      Left = 9
+      Top = 53
+      Width = 46
+      Height = 13
+      Caption = 'Password'
+    end
+    object Label6: TLabel
+      Left = 9
+      Top = 26
+      Width = 48
+      Height = 13
+      Caption = 'Username'
+    end
+    object Button4: TButton
+      Left = 204
+      Top = 50
+      Width = 75
+      Height = 25
+      Caption = 'Batal'
+      TabOrder = 0
+    end
+    object dbPassword: TDBEdit
+      Left = 74
+      Top = 50
+      Width = 121
+      Height = 21
+      DataField = 'password'
+      DataSource = DM_perpus127.ds_users127
+      TabOrder = 1
+    end
+    object dbUsername: TDBEdit
+      Left = 73
+      Top = 21
+      Width = 121
+      Height = 21
+      DataField = 'username'
+      DataSource = DM_perpus127.ds_users127
+      TabOrder = 2
+    end
+    object btnEdit: TButton
+      Left = 204
+      Top = 18
+      Width = 75
+      Height = 25
+      Caption = 'Edit Data'
+      TabOrder = 3
+      OnClick = btnEditClick
+    end
+    object dbRole: TSMDBComboBox
+      Left = 76
+      Top = 80
+      Width = 120
+      Height = 21
+      DataField = 'role'
+      DataSource = DM_perpus127.ds_users127
+      EnableValues = False
+      ItemHeight = 13
+      Items.Strings = (
+        'admin'
+        'petugas')
+      TabOrder = 4
     end
   end
   object GroupBox3: TGroupBox
@@ -235,7 +170,7 @@ object FormBuku: TFormBuku
     Height = 63
     Color = clScrollBar
     ParentColor = False
-    TabOrder = 1
+    TabOrder = 2
     object Button6: TButton
       Left = 621
       Top = 10
@@ -253,7 +188,7 @@ object FormBuku: TFormBuku
     Height = 407
     Color = clScrollBar
     ParentColor = False
-    TabOrder = 2
+    TabOrder = 3
     object Image1: TImage
       Left = 60
       Top = 20
@@ -946,13 +881,13 @@ object FormBuku: TFormBuku
     Height = 176
     Color = clCream
     ParentColor = False
-    TabOrder = 3
-    object dbgrid_anggota: TSMDBGrid
-      Left = 13
+    TabOrder = 4
+    object gridUser: TSMDBGrid
+      Left = 14
       Top = 23
-      Width = 497
+      Width = 500
       Height = 123
-      DataSource = DM_perpus127.ds_buku127
+      DataSource = DM_perpus127.ds_users127
       Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
@@ -981,41 +916,30 @@ object FormBuku: TFormBuku
       Columns = <
         item
           Expanded = False
-          FieldName = 'id_buku'
+          FieldName = 'id_user'
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'judul'
-          Width = 115
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'penulis'
+          FieldName = 'username'
           Width = 60
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'jenis'
-          Width = 60
+          FieldName = 'password'
+          Width = 80
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'stok'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'id_penerbit'
+          FieldName = 'role'
           Visible = True
         end>
     end
     object Button1: TButton
-      Left = 518
-      Top = 23
+      Left = 521
+      Top = 24
       Width = 75
       Height = 25
       Caption = 'Hapus Data'
@@ -1025,32 +949,32 @@ object FormBuku: TFormBuku
   end
   object SMDBNavigator1: TSMDBNavigator
     Left = 184
-    Top = 355
-    Width = 490
+    Top = 354
+    Width = 504
     Height = 25
-    DataSource = DM_perpus127.ds_buku127
+    DataSource = DM_perpus127.ds_users127
     VisibleButtons = [sbFirst, sbPrior, sbNext, sbLast, sbInsert, sbDelete, sbEdit, sbFilter, sbFind, sbPrint, sbExport, sbPost, sbCancel, sbRefresh]
     Layout = blGlyphLeft
     ShowCaption = False
     ShowGlyph = True
-    TabOrder = 4
-  end
-  object btnBuku: TButton
-    Left = 24
-    Top = 134
-    Width = 130
-    Height = 40
-    Caption = 'Menu Buku'
     TabOrder = 5
   end
-  object btnPinjam: TButton
-    Left = 25
-    Top = 191
+  object btnUser: TButton
+    Left = 23
+    Top = 200
     Width = 130
     Height = 40
-    Caption = 'Menu Pinjam'
+    Caption = 'Menu User'
     TabOrder = 6
-    OnClick = btnPinjamClick
+  end
+  object btnAnggota: TButton
+    Left = 22
+    Top = 138
+    Width = 130
+    Height = 40
+    Caption = 'Menu Anggota'
+    TabOrder = 7
+    OnClick = btnAnggotaClick
   end
   object Button3: TButton
     Left = 24
@@ -1058,6 +982,6 @@ object FormBuku: TFormBuku
     Width = 130
     Height = 40
     Caption = 'Dashboard'
-    TabOrder = 7
+    TabOrder = 8
   end
 end

@@ -55,8 +55,12 @@ begin
       Connect;
       ShowMessage('Koneksi database berhasil');
 
+      DM_perpus127.zq_anggota127.Active := True;
+      DM_perpus127.zq_users127.Active := True;
+      DM_perpus127.zq_penerbit127.Active := True;
+      DM_perpus127.zq_buku127.Active := True;
+      DM_perpus127.zq_peminjaman127.Active := True;
       FormLogin.btnLogin.Enabled  := True;
-      FormLogin.btnSignIn.Enabled := True;
 
       Hide; // ? BUKAN Close
     except

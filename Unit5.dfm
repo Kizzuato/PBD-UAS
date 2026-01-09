@@ -1,6 +1,6 @@
 object FormLoginDB: TFormLoginDB
-  Left = 167
-  Top = 178
+  Left = 232
+  Top = 186
   Width = 780
   Height = 480
   Caption = 'FormLoginDB'
@@ -565,7 +565,7 @@ object FormLoginDB: TFormLoginDB
         Left = 71
         Top = 133
         Width = 230
-        Height = 24
+        Height = 25
         Caption = 'Database Connection Page'
         Color = clWindow
         Font.Charset = ANSI_CHARSET
@@ -2586,7 +2586,7 @@ object FormLoginDB: TFormLoginDB
         TabOrder = 0
       end
       object btnLogin: TButton
-        Left = 225
+        Left = 226
         Top = 294
         Width = 64
         Height = 25
