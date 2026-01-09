@@ -1,0 +1,324 @@
+object DM_perpus127: TDM_perpus127
+  OldCreateOrder = False
+  Left = 749
+  Top = 43
+  Height = 358
+  Width = 514
+  object ZConnection1: TZConnection
+    ControlsCodePage = cGET_ACP
+    AutoEncodeStrings = True
+    Properties.Strings = (
+      'AutoEncodeStrings=True'
+      'controls_cp=GET_ACP')
+    Connected = True
+    HostName = 'localhost'
+    Port = 3306
+    Database = 'db_perpustakaan'
+    User = 'root'
+    Protocol = 'mysql'
+    Left = 29
+    Top = 17
+  end
+  object ZQueryLogin: TZQuery
+    Connection = ZConnection1
+    SQL.Strings = (
+      'SELECT * FROM users'
+      'WHERE username = :u AND password = :p;')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'u'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'p'
+        ParamType = ptUnknown
+      end>
+    Left = 31
+    Top = 67
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'u'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'p'
+        ParamType = ptUnknown
+      end>
+  end
+  object ds_anggota127: TDataSource
+    DataSet = zq_anggota127
+    Left = 110
+    Top = 122
+  end
+  object zq_anggota127: TZQuery
+    Connection = ZConnection1
+    Active = True
+    SQL.Strings = (
+      'SELECT *  FROM anggota')
+    Params = <>
+    Left = 111
+    Top = 66
+    object zq_anggota127id_anggota: TIntegerField
+      FieldName = 'id_anggota'
+      Required = True
+    end
+    object zq_anggota127nama: TStringField
+      FieldName = 'nama'
+      Required = True
+      Size = 100
+    end
+    object zq_anggota127alamat: TStringField
+      FieldName = 'alamat'
+      Size = 50
+    end
+    object zq_anggota127no_hp: TStringField
+      FieldName = 'no_hp'
+      Size = 15
+    end
+  end
+  object zq_buku127: TZQuery
+    Connection = ZConnection1
+    Active = True
+    SQL.Strings = (
+      'SELECT * FROM buku')
+    Params = <>
+    Left = 187
+    Top = 65
+    object zq_buku127id_buku: TIntegerField
+      FieldName = 'id_buku'
+      Required = True
+    end
+    object zq_buku127judul: TStringField
+      FieldName = 'judul'
+      Required = True
+      Size = 150
+    end
+    object zq_buku127penulis: TStringField
+      FieldName = 'penulis'
+      Size = 100
+    end
+    object zq_buku127jenis: TStringField
+      FieldName = 'jenis'
+      Required = True
+      Size = 7
+    end
+    object zq_buku127stok: TIntegerField
+      FieldName = 'stok'
+    end
+    object zq_buku127id_penerbit: TIntegerField
+      FieldName = 'id_penerbit'
+    end
+  end
+  object ds_buku127: TDataSource
+    DataSet = zq_buku127
+    Left = 187
+    Top = 122
+  end
+  object zq_peminjaman127: TZQuery
+    Connection = ZConnection1
+    Active = True
+    SQL.Strings = (
+      'SELECT * FROM peminjaman')
+    Params = <>
+    Left = 270
+    Top = 64
+    object zq_peminjaman127id_peminjaman: TIntegerField
+      FieldName = 'id_peminjaman'
+      Required = True
+    end
+    object zq_peminjaman127id_anggota: TIntegerField
+      FieldName = 'id_anggota'
+    end
+    object zq_peminjaman127id_buku: TIntegerField
+      FieldName = 'id_buku'
+    end
+    object zq_peminjaman127tanggal_pinjam: TDateField
+      FieldName = 'tanggal_pinjam'
+    end
+    object zq_peminjaman127tanggal_kembali: TDateField
+      FieldName = 'tanggal_kembali'
+    end
+    object zq_peminjaman127status: TStringField
+      FieldName = 'status'
+      Size = 12
+    end
+  end
+  object ds_peminjaman127: TDataSource
+    DataSet = zq_peminjaman127
+    Left = 270
+    Top = 121
+  end
+  object zq_penerbit127: TZQuery
+    Connection = ZConnection1
+    Active = True
+    SQL.Strings = (
+      'SELECT * FROM penerbit')
+    Params = <>
+    DataSource = ds_anggota127
+    Left = 426
+    Top = 65
+    object zq_penerbit127id_penerbit: TIntegerField
+      FieldName = 'id_penerbit'
+      Required = True
+    end
+    object zq_penerbit127nama_penerbit: TStringField
+      FieldName = 'nama_penerbit'
+      Required = True
+      Size = 100
+    end
+  end
+  object ds_penerbit127: TDataSource
+    DataSet = zq_penerbit127
+    Left = 426
+    Top = 122
+  end
+  object zq_users127: TZQuery
+    Connection = ZConnection1
+    Active = True
+    SQL.Strings = (
+      'SELECT * FROM users')
+    Params = <>
+    Left = 352
+    Top = 67
+    object zq_users127id_user: TIntegerField
+      FieldName = 'id_user'
+      Required = True
+    end
+    object zq_users127username: TStringField
+      FieldName = 'username'
+      Required = True
+      Size = 50
+    end
+    object zq_users127password: TStringField
+      FieldName = 'password'
+      Required = True
+      Size = 50
+    end
+    object zq_users127role: TStringField
+      FieldName = 'role'
+      Required = True
+      Size = 7
+    end
+  end
+  object ds_users127: TDataSource
+    DataSet = zq_users127
+    Left = 352
+    Top = 121
+  end
+  object zq_del_anggota: TZQuery
+    Connection = ZConnection1
+    SQL.Strings = (
+      'SELECT id_anggota, nama, alamat, no_hp FROM anggota')
+    Params = <>
+    Left = 110
+    Top = 179
+    object IntegerField1: TIntegerField
+      FieldName = 'id_anggota'
+      Required = True
+    end
+    object StringField1: TStringField
+      FieldName = 'nama'
+      Required = True
+      Size = 100
+    end
+    object StringField2: TStringField
+      FieldName = 'alamat'
+      Size = 50
+    end
+    object StringField3: TStringField
+      FieldName = 'no_hp'
+      Size = 15
+    end
+  end
+  object zq_del_buku: TZQuery
+    Connection = ZConnection1
+    SQL.Strings = (
+      'SELECT * FROM buku')
+    Params = <>
+    Left = 186
+    Top = 178
+    object IntegerField2: TIntegerField
+      FieldName = 'id_buku'
+      Required = True
+    end
+    object StringField4: TStringField
+      FieldName = 'judul'
+      Required = True
+      Size = 150
+    end
+    object StringField5: TStringField
+      FieldName = 'penulis'
+      Size = 100
+    end
+    object StringField6: TStringField
+      FieldName = 'jenis'
+      Required = True
+      Size = 7
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'stok'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'id_penerbit'
+    end
+  end
+  object zq_del_peminjaman: TZQuery
+    Connection = ZConnection1
+    SQL.Strings = (
+      'SELECT * FROM peminjaman')
+    Params = <>
+    Left = 269
+    Top = 177
+    object IntegerField5: TIntegerField
+      FieldName = 'id_peminjaman'
+      Required = True
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'id_anggota'
+    end
+    object IntegerField7: TIntegerField
+      FieldName = 'id_buku'
+    end
+    object DateField1: TDateField
+      FieldName = 'tanggal_pinjam'
+    end
+    object DateField2: TDateField
+      FieldName = 'tanggal_kembali'
+    end
+    object StringField7: TStringField
+      FieldName = 'status'
+      Size = 12
+    end
+  end
+  object zq_del_users: TZQuery
+    Connection = ZConnection1
+    SQL.Strings = (
+      'SELECT * FROM users')
+    Params = <>
+    Left = 351
+    Top = 180
+    object IntegerField8: TIntegerField
+      FieldName = 'id_user'
+      Required = True
+    end
+    object StringField8: TStringField
+      FieldName = 'username'
+      Required = True
+      Size = 50
+    end
+    object StringField9: TStringField
+      FieldName = 'password'
+      Required = True
+      Size = 50
+    end
+    object StringField10: TStringField
+      FieldName = 'role'
+      Required = True
+      Size = 7
+    end
+  end
+end
